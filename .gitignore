@@ -1,0 +1,27 @@
+# FILEPATH: /home/cyrus/code/pmm_viewer/.gitignore
+
+# Python-specific files
+*.pyc
+__pycache__/
+
+# Virtual environments
+venv/
+env/
+env.bak/
+
+# Compiled files
+*.pyd
+*.pyo
+*.pyw
+*.pyz
+*.pyzw
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# Miscellaneous
+.DS_Store
+
+# App specific
+config.yml
