@@ -1,0 +1,25 @@
+<!DOCTYPE html> 
+<html> 
+    <head>
+        <title>PMM Report Browser</title> 
+    </head> 
+    <body> 
+        <h2>PMM Report</h2>
+        <div id="collections">
+        <ul>
+        {% for collection in collections %}
+
+                <li><a href="{{ url_for('.show_collection_details', report_name=filename, collection_name=collection.name) }}">{{collection.name}}</a>
+                    <ul>
+                    <li>{{collection.missing_tmdbids|length}} missing</li>
+                    <li>{{collection.added_tmdbids|length}} added</li>
+                    </ul>
+                </li>
+
+        {% endfor %}
+        </ul>
+
+ 
+        </div> 
+    </body> 
+</html>

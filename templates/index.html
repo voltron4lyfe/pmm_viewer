@@ -1,0 +1,17 @@
+
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <title>PMM Report Browser</title> 
+    </head> 
+    <body> 
+        <h2>PMM Reports</h2>
+        <div id="reports">
+        <ul>
+        {% for filename in report_files%}
+          <li><a href="{{ url_for('.show_report_details', report_name=filename) }}">{{filename}}</a></li>
+        {% endfor %}
+        </ul>
+        </div> 
+    </body> 
+</html> 

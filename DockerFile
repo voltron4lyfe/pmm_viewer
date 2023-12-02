@@ -1,0 +1,39 @@
+# Use the official Python 3.12 image as the base image
+FROM python:3.12
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the requirements.txt file to the container
+COPY requirements.txt .
+
+# Install the Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the application code to the container
+COPY . .
+
+# Create a user and map the user ID to the environment variables PUID and GUID if specified
+ARG PUID
+ARG GUID
+RUN if [ -n "$PUID" ] && [ -n "$GUID" ]; then \
+        groupadd -g $GUID appuser && \
+        useradd -u $PUID -g $GUID -s /bin/bash -m appuser; \
+    else \
+        useradd -ms /bin/bash appuser; \
+    fi
+
+# Set the ownership of the application directory to the appuser
+RUN chown -R appuser:appuser /app
+
+# Switch to the appuser
+USER appuser
+
+# Expose the port on which the Flask application will run
+EXPOSE 5000
+
+# Set the environment variable for Flask
+ENV FLASK_APP=app.py
+
+# Run the Flask application
+CMD ["flask", "run", "--host=0.0.0.0"]

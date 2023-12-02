@@ -1,0 +1,42 @@
+<!DOCTYPE html> 
+<html> 
+    <head>
+        <title>PMM Report Browser</title> 
+    </head> 
+    <body> 
+        <h2>PMM Report</h2>
+        <div id="reports">
+        
+        <h2>Collections Missing</h2>
+        {% for collection in collections if len(collection.missing) > 0 %}
+            <div>
+                <h2>{{collection.name}}</h3>
+                <ul>
+                {% for movie in collection.missing %}
+                <li><a href="{{movie.tmdb_url}}" rel="noreferrer noopener" target="_blank">{{movie.name}}</a>
+                    {% for overseerr in movie.overseerr_urls %}
+                        <a href="{{overseerr.url}}" rel="noreferrer noopener" target="_blank">{{overseerr.name}}</a>
+                    {% endfor %}
+                </li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+        {% for collection in collections%}
+            <div>
+                <h2>{{collection.name}}</h3>
+                <ul>
+                {% for movie in collection.missing %}
+                <li><a href="{{movie.tmdb_url}}" rel="noreferrer noopener" target="_blank">{{movie.name}}</a>
+                    {% for overseerr in movie.overseerr_urls %}
+                        <a href="{{overseerr.url}}" rel="noreferrer noopener" target="_blank">{{overseerr.name}}</a>
+                    {% endfor %}
+                </li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+ 
+        </div> 
+    </body> 
+</html>
